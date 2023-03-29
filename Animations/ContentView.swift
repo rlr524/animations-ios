@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var animationAmount = 1.0
+    @State var showingBindings = false
+    @State var showingExplicitAnimations = false
     
     var body: some View {
         VStack {
@@ -17,6 +19,32 @@ struct ContentView: View {
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
             Spacer()
+            Button("Bindings View") {
+                self.showingBindings.toggle()
+            }
+            .padding(20)
+            .background(.blue)
+            .foregroundColor(.white)
+            .clipShape(Rectangle())
+            .sheet(isPresented: $showingBindings) {
+                AnimatingBindings()
+            }
+            
+            Spacer()
+            
+            Button("Explicit Animations View") {
+                self.showingExplicitAnimations.toggle()
+            }
+            .padding(20)
+            .background(.blue)
+            .foregroundColor(.white)
+            .clipShape(Rectangle())
+            .sheet(isPresented: $showingExplicitAnimations) {
+                ExplicitAnimationView()
+            }
+            
+            Spacer()
+            
             Button("Tap Me") {
                 // animationAmount += 1
             }
