@@ -11,14 +11,12 @@ struct ContentView: View {
     @State private var animationAmount = 1.0
     @State var showingBindings = false
     @State var showingExplicitAnimations = false
+    @State var showingCardDrag = false
+    @State var showingHelloDrag = false
+    @State var showingTransitionsView = false
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Spacer()
             Button("Bindings View") {
                 self.showingBindings.toggle()
             }
@@ -41,6 +39,47 @@ struct ContentView: View {
             .clipShape(Rectangle())
             .sheet(isPresented: $showingExplicitAnimations) {
                 ExplicitAnimationView()
+            }
+            
+            Spacer()
+            
+            Button("Card Drag View") {
+                self.showingCardDrag.toggle()
+            }
+            .padding(20)
+            .background(.blue)
+            .foregroundColor(.white)
+            .clipShape(Rectangle())
+            .sheet(isPresented: $showingCardDrag) {
+                CardDragView()
+            }
+            
+            Spacer()
+            
+            Section {
+                Button("Hello Drag View") {
+                    self.showingHelloDrag.toggle()
+                }
+                .padding(20)
+                .background(.blue)
+                .foregroundColor(.white)
+                .clipShape(Rectangle())
+                .sheet(isPresented: $showingHelloDrag) {
+                    HelloDragView()
+                }
+                
+                Spacer()
+                
+                Button("Transitions View") {
+                    self.showingTransitionsView.toggle()
+                }
+                .padding(20)
+                .background(.blue)
+                .foregroundColor(.white)
+                .clipShape(Rectangle())
+                .sheet(isPresented: $showingTransitionsView) {
+                    TransitionsView()
+                }
             }
             
             Spacer()
@@ -73,7 +112,6 @@ struct ContentView: View {
             // .animation(.interpolatingSpring(stiffness: 50, damping: 1), value: animationAmount)
             // .animation(.easeOut(duration: 2)
             //    .delay(1), value: animationAmount)
-            Spacer()
         }
         .padding()
     }
